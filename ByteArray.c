@@ -159,14 +159,11 @@ bool arraysEqual(uint8_t* array1, uint8_t* array2, int length)
 	return true;
 }
 
-bool arraysEqualL(uint8_t* array1, uint8_t* array2, int len1, int len2)
+bool arraysEqualL(uint8_t* array1, uint8_t* array2, int len)
 {
-	pHex_nl(array1, len1);
-	pHex_nl(array2, len2);
-	if(len1 != len2)
-		return false;
-
-	for(int i = 0; i < len1; i++){
+	pHex_nl(array1, len);
+	pHex_nl(array2, len);
+	for(int i = 0; i < len; i++){
 		if(array1[i] != array2[i]){
 			return false;
 		}

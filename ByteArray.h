@@ -33,7 +33,7 @@ void arrayCpy(uint8_t* target, uint8_t* array, int start, int stop, int endn);
 int convert_ASCIIbyteHexString_to_byteArray(uint8_t* out, char* in);
 
 bool arraysEqual(uint8_t* array1, uint8_t* array2, int length);
-bool arraysEqualL(uint8_t* array1, uint8_t* array2, int len1, int len2);
+bool arraysEqualL(uint8_t* array1, uint8_t* array2, int len);
 bool arrayIsZeros(uint8_t* array, int len);
 
 uint8_t getXor(uint8_t* array, uint8_t len);
