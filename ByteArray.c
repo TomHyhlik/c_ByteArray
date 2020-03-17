@@ -107,40 +107,50 @@ void arrayCpy(uint8_t* target, uint8_t* array, int start, int stop, int endian)
  */
 int convert_ASCIIbyteHexString_to_byteArray(uint8_t* out, char* in)
 {
-	int out_point = 0;
-	int number;
+	uint8_t number;
+    int in_ptr, out_ptr;
 	int out_len = strlen(in)/2;
+
+	bool isEvenChar = false;
 	memset(out, 0, out_len);
 
 	/* for each character */
-	for (int i = 0 ; i < strlen(in); i++)
+	for (in_ptr = 0, out_ptr = 0; in_ptr < strlen(in); in_ptr++)
 	{
 		/* 1...9 */
-		if(in[i] >= 48 && in[i] <= 57){
-			number = in[i] - 48;
+		if(in[in_ptr] >= 48 && in[in_ptr] <= 57) {
+			number = in[in_ptr] - 48;
 		}
 		/* A...F */
-		else if (in[i] >= 65 && in[i] <= 70){
-			number = in[i] - 65 + 10;
+		else if (in[in_ptr] >= 65 && in[in_ptr] <= 70) {
+			number = in[in_ptr] - 65 + 10;
 		}
 		/* a...f */
-		else if (in[i] >= 97 && in[i] <= 102){
-			number = in[i] - 97 + 10;
+		else if (in[in_ptr] >= 97 && in[in_ptr] <= 102) {
+			number = in[in_ptr] - 97 + 10;
 		}
+        /* skip in case of space */
+        else if (in[in_ptr] == ' ') {
+			continue;
+        }
 		else {
-			printf("Invalid character: \"%d\", at possition: %d\n", in[i], i);
+			printf("Invalid character: \"%d\", at possition: %d\n", in[in_ptr], in_ptr);
 			return -1;
 		}
 		/* in case of an odd or even character */
-		if(i%2 == 1){
-			out[out_point] |= number;
-			out_point++;
+		if (isEvenChar) {
+			isEvenChar = false;
+			out[out_ptr] |= number;
+			out_ptr++;
 		} else {
-			out[out_point] |= number << 4;
+			isEvenChar = true;
+			out[out_ptr] = 0;
+			out[out_ptr] |= number << 4;
 		}
 	}
-	return out_len;
+	return out_ptr;
 }
+
 
 ////////////////////////////////////////////////////
 bool arraysEqual(uint8_t* array1, uint8_t* array2, int length)
