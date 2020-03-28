@@ -1,3 +1,3 @@
 all:
-	g++ ./*.c ../*.c -o bin
+	gcc ./*.c ../*.c -o bin
 	./bin
