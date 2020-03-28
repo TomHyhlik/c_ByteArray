@@ -1,15 +1,3 @@
-/*
- * ByteArray.c
- *
- *  Created on: Jul 23, 2018
- *      Author: hyhlik
- *
- *
- *      description:
- *      this source file contains basic functions for byte arrays
- *
- */
-
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -19,10 +7,8 @@
 #include "ByteArray.h"
 
 
-
 ////////////////////////////////////////////////////
-/* prints array hex numbers without \n at the end
- */
+/* prints array hex numbers without \n at the end */
 void pHex(uint8_t* str, int len)
 {
 	if(str == NULL){
@@ -33,8 +19,7 @@ void pHex(uint8_t* str, int len)
         printf("%.2X", str[i]);
 }
 ////////////////////////////////////////////////////
-/* prints array hex numbers with \n at the end
- */
+/* prints array hex numbers with \n at the end */
 void pHex_nl(uint8_t* str, int len)
 {
 	pHex(str, len);
@@ -155,11 +140,6 @@ int convert_ASCIIbyteHexString_to_byteArray(uint8_t* out, char* in)
 ////////////////////////////////////////////////////
 bool arraysEqual(uint8_t* array1, uint8_t* array2, int length)
 {
-//		printf("Compairing: ");
-//		pHex(array1, length);
-//		printf(" and ");
-//		pHex_nl(array2, length);
-
 	for (int i = 0; i < length; i++) {
 		if (array1[i] != array2[i]) {
 			return false;
@@ -169,30 +149,17 @@ bool arraysEqual(uint8_t* array1, uint8_t* array2, int length)
 	return true;
 }
 
-bool arraysEqualL(uint8_t* array1, uint8_t* array2, int len)
-{
-	pHex_nl(array1, len);
-	pHex_nl(array2, len);
-	for(int i = 0; i < len; i++){
-		if(array1[i] != array2[i]){
-			return false;
-		}
-	}
-	return true;
-}
 ///////////////////////////////////////////////////////////
 uint8_t calcCRC(uint8_t* data, uint8_t data_len)
 {
 	uint8_t calculatedCRC = 0;
-	/* debug */
-//	printf("--------calculating crc from data: ");
-//	pHex_nl(data, data_len);
 
 	for(int i = 0; i < data_len; i++)
 		calculatedCRC ^= data[i];
 
 	return calculatedCRC;
 }
+
 ///////////////////////////////////////////////////////////
 bool arrayIsZeros(uint8_t* array, int len)
 {
